@@ -112,13 +112,18 @@ mode: single
 #### Medod B
 
 ```
-action: email_notifier.send
-metadata: {}
-data:
-  account: notify.email_notification_sender_1
-  recipients: recipient@example.com
-  title: Test Message
-  message: This is a test message from Home Assistant
+alias: Send Test Message
+description: ""
+triggers: []
+conditions: []
+actions:
+  - action: email_notifier.send
+    metadata: {}
+    data:
+      account: notify.email_notification_sender_1
+      recipients: recipient@example.com
+      title: Test Message
+      message: This is a test message from Home Assistant
 ```
 <br />
 
