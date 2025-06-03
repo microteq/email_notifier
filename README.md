@@ -32,12 +32,14 @@ This is the recommended installation method.
 - Restart Home Assistant.
 <br>
 <br>
+
 ## Configuration
 
 In your Home Assistant go to _Settings_ > _Devices & services_ and click on _Add integration_. In the search field, search for _email_ and select the integration. This will add an email account entity, you can use to send email notifications from. Fill in the needed information of your mail server. 
 
 <br>
 <br>
+
 ## Usage
 
 The Email Notifier creates email accounts from which notifications can be sent. Each account also has a default recipient. In Home Assistant, sending a message is typically used as an action in an automation.
