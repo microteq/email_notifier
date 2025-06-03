@@ -1,0 +1,103 @@
+{
+    "title": "Email Notifier",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configuration du compte email",
+                "description": "Veuillez entrer les détails du serveur SMTP",
+                "data": {
+                    "server": "Serveur SMTP",
+                    "port": "Port",
+                    "username": "Nom d'utilisateur",
+                    "password": "Mot de passe",
+                    "sender": "Email de l'expéditeur",
+                    "recipients": "Email(s) du/des destinataire(s)",
+                    "sender_name": "Nom de l'expéditeur",
+                    "encryption": "Chiffrement",
+                    "timeout": "Délai d'attente (secondes)",
+                    "test_connection": "Tester la connexion"
+                }
+            }
+        },
+        "error": {
+            "connection_failed": "Échec de la connexion au serveur SMTP. Veuillez vérifier vos paramètres."
+        },
+        "abort": {
+            "already_configured": "Ce compte email est déjà configuré."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Modifier le compte email",
+                "description": "Modifier les paramètres du compte email",
+                "data": {
+                    "server": "Serveur SMTP",
+                    "port": "Port",
+                    "username": "Nom d'utilisateur",
+                    "password": "Mot de passe",
+                    "sender": "Email de l'expéditeur",
+                    "recipients": "Email(s) du/des destinataire(s)",
+                    "sender_name": "Nom de l'expéditeur",
+                    "encryption": "Chiffrement",
+                    "timeout": "Délai d'attente (secondes)",
+                    "test_connection": "Tester la connexion"
+                }
+            }
+        },
+        "error": {
+            "connection_failed": "Échec de la connexion au serveur SMTP. Veuillez vérifier vos paramètres."
+        }
+    },
+    "entity": {
+        "notify": {
+            "entity_name": {
+                "name": "Compte email de l'expéditeur : {sender}"
+            }
+        },
+        "state": {
+            "ready": "Prêt",
+            "sending": "Envoi en cours..."
+        }
+    },
+    "error": {
+        "smtp_connection": "Serveur SMTP introuvable ou connexion refusée (%s:%s). Veuillez vérifier l'adresse IP, le nom d'hôte et la disponibilité du serveur SMTP",
+        "smtp_auth": "Connexion impossible. Veuillez vérifier vos paramètres et/ou vos identifiants",
+        "smtp_disconnected": "SMTPServerDisconnected lors de l'envoi de l'email : nouvelle tentative de connexion",
+        "smtp_exception": "SMTPException lors de l'envoi de l'email : nouvelle tentative de connexion",
+        "attachment_not_found": "Pièce jointe %s introuvable. Ignorée",
+        "attachment_mime_type": "La pièce jointe %s a un type MIME inconnu. Utilisation du type fichier par défaut",
+        "remote_path_not_allowed": "Chemin distant non autorisé. Veuillez ajouter %(file_path)s à %(allow_list)s dans votre configuration. Pour plus d'informations : %(url)s"
+    },
+    "selector": {
+        "encryption": {
+            "options": {
+                "none": "Aucun",
+                "starttls": "STARTTLS",
+                "tls": "TLS"
+            }
+        }
+    },
+    "services": {
+        "send": {
+            "name": "Envoyer un email",
+            "description": "Envoyer un message email à un ou plusieurs destinataires.",
+            "fields": {
+                "account": {
+                    "name": "Compte email de l'expéditeur",
+                    "description": "Le compte email de l'expéditeur"
+                },
+                "recipients": {
+                    "name": "Email(s) du/des destinataire(s)",
+                    "description": "Séparer plusieurs destinataires par des virgules."
+                },
+                "title": {
+                    "name": "Objet"
+                },
+                "message": {
+                    "name": "Message"
+                }
+            }
+        }
+    }
+}

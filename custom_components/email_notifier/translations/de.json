@@ -1,0 +1,117 @@
+{
+    "title": "Email Notifier",
+    "config": {
+        "step": {
+            "user": {
+                "title": "E-Mail Konto Konfiguration",
+                "description": "Bitte geben Sie die SMTP-Server-Details ein",
+                "data": {
+                    "server": "SMTP-Server",
+                    "port": "Port",
+                    "username": "Benutzername",
+                    "password": "Passwort",
+                    "sender": "Absender-E-Mail",
+                    "recipients": "Empfänger-E-Mail(s)",
+                    "sender_name": "Absender-Name",
+                    "encryption": "Verschlüsselung",
+                    "timeout": "Timeout (Sekunden)",
+                    "test_connection": "Verbindung testen"
+                }
+            }
+        },
+        "error": {
+            "connection_failed": "Verbindung zum SMTP-Server fehlgeschlagen. Bitte überprüfen Sie die Einstellungen."
+        },
+        "abort": {
+            "already_configured": "Dieses E-Mail Konto ist bereits konfiguriert."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "E-Mail Konto bearbeiten",
+                "description": "E-Mail Konto Einstellungen anpassen",
+                "data": {
+                    "server": "SMTP-Server",
+                    "port": "Port",
+                    "username": "Benutzername",
+                    "password": "Passwort",
+                    "sender": "Absender-E-Mail",
+                    "recipients": "Empfänger-E-Mail(s)",
+                    "sender_name": "Absender-Name",
+                    "encryption": "Verschlüsselung",
+                    "timeout": "Timeout (Sekunden)",
+                    "test_connection": "Verbindung testen"
+                }
+            }
+        },
+        "error": {
+            "connection_failed": "Verbindung zum SMTP-Server fehlgeschlagen. Bitte überprüfen Sie die Einstellungen."
+        }
+    },
+    "entity": 
+    {
+        "notify":
+        {
+            "entity_name": 
+            {
+             "name": "Absender E-Mail Konto: {sender}"
+            }
+        },
+        "state": 
+        {
+            "ready": "Bereit",
+            "sending": "Sende..."
+        }
+    },
+    "error": {
+        "smtp_connection": "SMTP-Server nicht gefunden oder Verbindung verweigert (%s:%s). Bitte überprüfen Sie die IP-Adresse, den Hostnamen und die Verfügbarkeit Ihres SMTP-Servers",
+        "smtp_auth": "Anmeldung nicht möglich. Bitte überprüfen Sie Ihre Einstellungen und/oder Ihre Anmeldedaten",
+        "smtp_disconnected": "SMTP-Server-Verbindung getrennt beim Senden der E-Mail: Verbindung wird erneut versucht",
+        "smtp_exception": "SMTP-Fehler beim Senden der E-Mail: Verbindung wird erneut versucht",
+        "attachment_not_found": "Anhang %s nicht gefunden. Wird übersprungen",
+        "attachment_mime_type": "Anhang %s hat einen unbekannten MIME-Typ. Fallback auf Datei",
+        "remote_path_not_allowed": "Externer Pfad nicht erlaubt. Bitte fügen Sie %(file_path)s zur %(allow_list)s in Ihrer Konfiguration hinzu. Weitere Informationen: %(url)s"
+    },
+    "selector": 
+    {
+        "encryption": 
+        {
+            "options": 
+            {
+                "none": "Keine",
+                "starttls": "STARTTLS",
+                "tls": "TLS"
+            }
+        }
+    },
+    "services": 
+    {
+        "send": 
+        {
+            "name": "E-Mail versenden",
+            "description": "Eine E-Mail Nachricht an einen oder mehrere Empfänger versenden.",
+            "fields": 
+            {
+                "account":
+                {
+                    "name": "Absender-E-Mail Konto",
+                    "description": "Das E-Mail Konto des Absenders"
+                },
+                    "recipients": 
+                {
+                    "name": "Empfänger-E-Mail(s)",
+                    "description": "Mehere Empfänger durch Komma trennen."
+                },
+                "title": 
+                {
+                    "name": "Betreff"
+                },
+                "message": 
+                {
+                    "name": "Nachricht"
+                }
+            }
+        }
+    }
+} 

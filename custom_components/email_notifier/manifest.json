@@ -1,0 +1,13 @@
+{
+  "domain": "email_notifier",
+  "name": "Email Notification Service",
+  "codeowners": ["@microteq"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/microteq/email_notification",
+  "integration_type": "service",
+  "issue_tracker": "https://github.com/microteq/email_notification/issues",
+  "requirements": [],
+  "translations": ["de", "en"],
+  "version": "0.1.0"
+}

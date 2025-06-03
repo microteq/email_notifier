@@ -1,0 +1,19 @@
+send:
+  fields:
+    account:
+      required: true
+      selector:
+        entity:
+          integration: email_notifier
+    recipients:
+      required: true
+      selector:
+        text:
+    title:
+      required: true
+      selector:
+        text:
+    message:
+      required: true
+      selector:
+            text:

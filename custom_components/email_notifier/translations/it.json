@@ -1,0 +1,103 @@
+{
+    "title": "Email Notifier",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configurazione Account Email",
+                "description": "Inserisci i dettagli del server SMTP",
+                "data": {
+                    "server": "Server SMTP",
+                    "port": "Porta",
+                    "username": "Nome utente",
+                    "password": "Password",
+                    "sender": "Email mittente",
+                    "recipients": "Email destinatario(i)",
+                    "sender_name": "Nome mittente",
+                    "encryption": "Crittografia",
+                    "timeout": "Timeout (secondi)",
+                    "test_connection": "Testa connessione"
+                }
+            }
+        },
+        "error": {
+            "connection_failed": "Connessione al server SMTP fallita. Controlla le impostazioni."
+        },
+        "abort": {
+            "already_configured": "Questo account email è già configurato."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Modifica Account Email",
+                "description": "Modifica le impostazioni dell'account email",
+                "data": {
+                    "server": "Server SMTP",
+                    "port": "Porta",
+                    "username": "Nome utente",
+                    "password": "Password",
+                    "sender": "Email mittente",
+                    "recipients": "Email destinatario(i)",
+                    "sender_name": "Nome mittente",
+                    "encryption": "Crittografia",
+                    "timeout": "Timeout (secondi)",
+                    "test_connection": "Testa connessione"
+                }
+            }
+        },
+        "error": {
+            "connection_failed": "Connessione al server SMTP fallita. Controlla le impostazioni."
+        }
+    },
+    "entity": {
+        "notify": {
+            "entity_name": {
+                "name": "Account email mittente: {sender}"
+            }
+        },
+        "state": {
+            "ready": "Pronto",
+            "sending": "Invio in corso..."
+        }
+    },
+    "error": {
+        "smtp_connection": "Server SMTP non trovato o connessione rifiutata (%s:%s). Controlla l'indirizzo IP, il nome host e la disponibilità del server SMTP",
+        "smtp_auth": "Accesso non possibile. Controlla le impostazioni e/o le credenziali",
+        "smtp_disconnected": "SMTPServerDisconnected durante l'invio della mail: tentativo di riconnessione",
+        "smtp_exception": "SMTPException durante l'invio della mail: tentativo di riconnessione",
+        "attachment_not_found": "Allegato %s non trovato. Saltato",
+        "attachment_mime_type": "Allegato %s con tipo MIME sconosciuto. Utilizzo tipo file predefinito",
+        "remote_path_not_allowed": "Percorso remoto non consentito. Aggiungi %(file_path)s a %(allow_list)s nella configurazione. Per maggiori informazioni: %(url)s"
+    },
+    "selector": {
+        "encryption": {
+            "options": {
+                "none": "Nessuno",
+                "starttls": "STARTTLS",
+                "tls": "TLS"
+            }
+        }
+    },
+    "services": {
+        "send": {
+            "name": "Invia Email",
+            "description": "Invia un messaggio email a uno o più destinatari.",
+            "fields": {
+                "account": {
+                    "name": "Account email mittente",
+                    "description": "L'account email del mittente"
+                },
+                "recipients": {
+                    "name": "Email destinatario(i)",
+                    "description": "Separa più destinatari con una virgola."
+                },
+                "title": {
+                    "name": "Oggetto"
+                },
+                "message": {
+                    "name": "Messaggio"
+                }
+            }
+        }
+    }
+}
