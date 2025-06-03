@@ -19,7 +19,7 @@ The Email Notifier is an integration for Home Assistant allowing you to send ema
 ### HACS (recommended)
 <!--<a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=microteq&amp;repository=whatsigram_messenger&amp;category=integration" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open your Home Assistant instance and open a repository inside the Home Assistant Community Store."></a>-->
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=microteq&repository=whatsigram_messenger)
+<!--[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=microteq&repository=whatsigram_messenger)-->
 
 This is the recommended installation method.
 
@@ -27,9 +27,9 @@ This is the recommended installation method.
 - Restart Home Assistant
 
 ### Manual
-- Download the latest release
-- Copy the contents of custom_components into the /config/custom_components directory of your Home Assistant installation
-- Restart Home Assistant
+- Download the latest release.
+- Copy the contents of custom_components into the /config/custom_components directory of your Home Assistant installation.
+- Restart Home Assistant.
 <br>
 <br>
 ## Configuration
