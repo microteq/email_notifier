@@ -45,29 +45,39 @@ SMTP server which is used to send the notifications.
 #### Port (default: 587)
 The port that the SMTP server is using.
 
-Username
+#### Username
 Username for the SMTP account.
 
-Password
+#### Password
 Password for the SMTP server that belongs to the given username. 
 
-Sender Email
+#### Sender Email
 Email address of the sender.
 
-Recipient Email(s)
+#### Recipient Email(s)
 Default email address of the recipient of the notification. This can be a recipient address or a comma delimited list of addresses for multiple recipients.
 This is where you want to send your email notifications by default (when not specifying recipients in the action). Any email address(es) specified in the action’s recipient field will override this recipient content.
 
-Sender name
+#### Sender name
 Sets a custom ‘sender name’ in the emails headers.
 
-Encryption (default: starttls)
+#### Encryption (default: starttls)
 Set mode for encryption, starttls, tls or none.
 
-Timeout (default: 15)
+#### Timeout (default: 15)
 The timeout in seconds that the SMTP server is using.
 <br>
 <br>
+
+### Google Mail
+Google has some extra layers of protection that need special attention. You must use an **application-specific** password in your notification configuration.
+
+If any of the following conditions are met you will not be able to create an app password:
+
+- You do not have 2-step verification enabled on your account.
+- You have 2-step verification enabled but have only added a security key as an authentication mechanism.
+- Your Google account is enrolled in Google’s Advanced Protection Program.
+- Your Google account belongs to a Google Workspace that has disabled this feature. Accounts owned by a school, business, or other organization are examples of Google Workspace accounts.
 
 ## Usage
 
