@@ -77,6 +77,7 @@ If any of the following conditions are met you will not be able to create an app
 - You have 2-step verification enabled but have only added a security key as an authentication mechanism.
 - Your Google account is enrolled in Google’s Advanced Protection Program.
 - Your Google account belongs to a Google Workspace that has disabled this feature. Accounts owned by a school, business, or other organization are examples of Google Workspace accounts.
+<br/>
 
 ## Usage
 
