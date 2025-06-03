@@ -39,10 +39,10 @@ In your Home Assistant go to _Settings_ > _Devices & services_ and click on _Add
 
 ### Configuration fields
 
-SMTP Server
+#### SMTP Server
 SMTP server which is used to send the notifications.
 
-Port (default: 587)
+#### Port (default: 587)
 The port that the SMTP server is using.
 
 Username
