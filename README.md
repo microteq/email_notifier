@@ -31,7 +31,7 @@ This is the recommended installation method.
 - Copy the contents of custom_components into the /config/custom_components directory of your Home Assistant installation.
 - Restart Home Assistant.
 <br>
-<br>
+
 ## Configuration
 
 In your Home Assistant go to _Settings_ > _Devices & services_ and click on _Add integration_. In the search field, search for _email_ and select the integration. This will add an email account entity, you can use to send email notifications from. Fill in the needed information of your mail server. 
