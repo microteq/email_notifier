@@ -37,6 +37,35 @@ This is the recommended installation method.
 
 In your Home Assistant go to _Settings_ > _Devices & services_ and click on _Add integration_. In the search field, search for _email_ and select the integration. This will add an email account entity, you can use to send email notifications from. Fill in the needed information of your mail server. 
 
+### Configuration fields
+
+SMTP Server
+SMTP server which is used to send the notifications.
+
+Port (default: 587)
+The port that the SMTP server is using.
+
+Username
+Username for the SMTP account.
+
+Password
+Password for the SMTP server that belongs to the given username. 
+
+Sender Email
+Email address of the sender.
+
+Recipient Email(s)
+Default email address of the recipient of the notification. This can be a recipient address or a comma delimited list of addresses for multiple recipients.
+This is where you want to send your email notifications by default (when not specifying recipients in the action). Any email address(es) specified in the action’s recipient field will override this recipient content.
+
+Sender name
+Sets a custom ‘sender name’ in the emails headers.
+
+Encryption (default: starttls)
+Set mode for encryption, starttls, tls or none.
+
+Timeout (default: 15)
+The timeout in seconds that the SMTP server is using.
 <br>
 <br>
 
