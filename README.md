@@ -93,6 +93,8 @@ In your automation, click on _Add action_, then search for _email_ and select th
 
 ### Writing YAML
 
+#### Method A
+
 ```
 alias: Send Test Message
 description: ""
@@ -105,6 +107,18 @@ actions:
     target:
       entity_id: notify.email_notification_sender_1
 mode: single
+```
+
+#### Medod B
+
+```
+action: email_notifier.send
+metadata: {}
+data:
+  account: notify.email_notification_sender_1
+  recipients: recipient@example.com
+  title: Test Message
+  message: This is a test message from Home Assistant
 ```
 <br />
 
