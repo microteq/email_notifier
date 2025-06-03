@@ -122,8 +122,8 @@ actions:
     data:
       account: notify.email_notification_sender_1
       recipients: recipient@example.com
-      title: Test Message
-      message: This is a test message from Home Assistant
+      title: "Test Message"
+      message: "This is a test message from Home Assistant"
 ```
 <br />
 
