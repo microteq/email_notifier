@@ -69,11 +69,11 @@
                 "name": "Sender Email Account: {sender}"
             }
         },
-        "state": 
-        {
-            "ready": "Ready",
-            "sending": "Sending..."
-        }
+       "notifier":
+            {
+                "ready": "Ready",
+                "sending": "Sending..."
+            }
     },
     "error": 
     {
