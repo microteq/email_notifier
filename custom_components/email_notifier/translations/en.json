@@ -68,11 +68,17 @@
             {
                 "name": "Sender Email Account: {sender}"
             }
+        },
+        "state": 
+        {
+            "ready": {"name":"Ready"},
+            "sending": {"name": "Sending..."}
         }
+
     },
     "error": 
     {
-        "attachment_not_found": "Attachment %s not found. Skipping",
+        "attachment_not_found": {"name": "Attachment %s not found. Skipping"},
         "attachment_mime_type": "Attachment %s has an unknown MIME type. Falling back to file",
         "remote_path_not_allowed": "Remote path not allowed. Please add %(file_path)s to %(allow_list)s in your configuration. For more information: %(url)s"
     },
