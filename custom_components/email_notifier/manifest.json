@@ -6,6 +6,7 @@
   "dependencies": [],
   "documentation": "https://github.com/microteq/email_notification",
   "integration_type": "service",
+  "iot_class": "cloud_push",
   "issue_tracker": "https://github.com/microteq/email_notification/issues",
   "requirements": [],
   "version": "0.1.0"
