@@ -1,4 +1,4 @@
-
+{
   "domain": "email_notifier",
   "name": "Email Notification Service",
   "codeowners": ["@microteq"],
