@@ -72,10 +72,6 @@
     },
     "error": 
     {
-        "smtp_connection": "SMTP server not found or refused connection (%s:%s). Please check the IP address, hostname, and availability of your SMTP server",
-        "smtp_auth": "Login not possible. Please check your settings and/or your credentials",
-        "smtp_disconnected": "SMTPServerDisconnected sending mail: retrying connection",
-        "smtp_exception": "SMTPException sending mail: retrying connection",
         "attachment_not_found": "Attachment %s not found. Skipping",
         "attachment_mime_type": "Attachment %s has an unknown MIME type. Falling back to file",
         "remote_path_not_allowed": "Remote path not allowed. Please add %(file_path)s to %(allow_list)s in your configuration. For more information: %(url)s"
