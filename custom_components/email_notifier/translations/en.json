@@ -108,11 +108,13 @@
                 },
                 "title": 
                 {
-                    "name": "Subject"
+                    "name": "Subject",
+                    "description": ""
                 },
                 "message": 
                 {
-                    "name": "Message"
+                    "name": "Message",
+                    "description": ""
                 }
             }
         }
