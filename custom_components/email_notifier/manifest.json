@@ -8,6 +8,5 @@
   "integration_type": "service",
   "issue_tracker": "https://github.com/microteq/email_notification/issues",
   "requirements": [],
-  "translations": ["de", "en"],
   "version": "0.1.0"
 }
