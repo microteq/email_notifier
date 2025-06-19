@@ -67,12 +67,7 @@
             "entity_name": 
             {
                 "name": "Sender Email Account: {sender}"
-            },
-            "state":
-            {
-                "ready": "Ready",
-                "sending": "Sending..."
-            }  
+            }
         }
     },
     "error": 
