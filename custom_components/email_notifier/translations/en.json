@@ -76,12 +76,6 @@
         }
 
     },
-    "error": 
-    {
-        "attachment_not_found": {"name": "Attachment not found. Skipping"},
-        "attachment_mime_type": "Attachment has an unknown MIME type. Falling back to file",
-        "remote_path_not_allowed": "Remote path not allowed. Please add %(file_path)s to %(allow_list)s in your configuration. For more information: %(url)s"
-    },
     "selector": 
     {
         "encryption": 
