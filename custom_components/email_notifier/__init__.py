@@ -11,8 +11,59 @@ from homeassistant.config_entries import _LOGGER, ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 
-from .const import DOMAIN, GLOBAL_API, GLOBAL_COUNTER, PLATFORM
+from .const import (
+    CONF_ENCRYPTION,
+    CONF_PASSWORD,
+    CONF_PORT,
+    CONF_RECIPIENTS,
+    CONF_SENDER,
+    CONF_SENDER_NAME,
+    CONF_SERVER,
+    CONF_TEST_CONNECTION,
+    CONF_TIMEOUT,
+    CONF_USERNAME,
+    DOMAIN,
+    ENCRYPTION_OPTIONS,
+    GLOBAL_API,
+    GLOBAL_COUNTER,
+    PLATFORM,
+)
 from .smtp_api import SmtpAPI
+
+CONFIG_SCHEMA = vol.Schema(
+    {
+        DOMAIN: vol.Schema(
+            {
+                vol.Required(CONF_SERVER): str,
+                vol.Required(CONF_PORT): str,
+                vol.Required(CONF_USERNAME): str,
+                vol.Required(CONF_PASSWORD): str,
+                vol.Required(CONF_SENDER): str,
+                vol.Required(CONF_RECIPIENTS): str,
+                vol.Optional(CONF_SENDER_NAME): str,
+                vol.Required(CONF_ENCRYPTION): selector.SelectSelector(selector.SelectSelectorConfig(
+                    options =  ENCRYPTION_OPTIONS,
+                    translation_key = CONF_ENCRYPTION)),
+                vol.Required(CONF_TIMEOUT): int,
+                vol.Optional(CONF_TEST_CONNECTION): bool
+            }
+        )
+    },
+    extra=vol.ALLOW_EXTRA,  # Allow additional keys in YAML
+)
+
+# ***********************************************************************************************************************************************
+# Purpose:  Initialize global variables
+# History:  D.Geisenhoff    29-MAY-2025     Created
+# ***********************************************************************************************************************************************
+def init_vars(hass: HomeAssistant):
+    """Initialize global variables for the Whatsigram Messenger component."""
+    # Set a global counter for the entity id (entity id should not change after entity has been created, so the name of the sender cannot be taken)
+    # The entity id will be notify_whatsigram_recipient_1, ...recipient_2, ...
+    if GLOBAL_COUNTER not in hass.data[DOMAIN]:
+        hass.data[DOMAIN][GLOBAL_COUNTER] = 1
+    else:
+        hass.data[DOMAIN][GLOBAL_COUNTER] += 1
 
 
 # ***********************************************************************************************************************************************
