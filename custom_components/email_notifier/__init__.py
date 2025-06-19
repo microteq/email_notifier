@@ -9,7 +9,7 @@ import voluptuous as vol
 
 from homeassistant.config_entries import _LOGGER, ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import entity_registry as er
+from homeassistant.helpers import entity_registry as er, selector
 
 from .const import (
     CONF_ENCRYPTION,
@@ -51,20 +51,6 @@ CONFIG_SCHEMA = vol.Schema(
     },
     extra=vol.ALLOW_EXTRA,  # Allow additional keys in YAML
 )
-
-# ***********************************************************************************************************************************************
-# Purpose:  Initialize global variables
-# History:  D.Geisenhoff    29-MAY-2025     Created
-# ***********************************************************************************************************************************************
-def init_vars(hass: HomeAssistant):
-    """Initialize global variables for the Whatsigram Messenger component."""
-    # Set a global counter for the entity id (entity id should not change after entity has been created, so the name of the sender cannot be taken)
-    # The entity id will be notify_whatsigram_recipient_1, ...recipient_2, ...
-    if GLOBAL_COUNTER not in hass.data[DOMAIN]:
-        hass.data[DOMAIN][GLOBAL_COUNTER] = 1
-    else:
-        hass.data[DOMAIN][GLOBAL_COUNTER] += 1
-
 
 # ***********************************************************************************************************************************************
 # Purpose:  Initialize global variables

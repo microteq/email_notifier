@@ -56,18 +56,16 @@
             }
         },
         "state": {
-            "ready": "Prêt",
-            "sending": "Envoi en cours..."
+            "ready":
+            {
+                "name": "Prêt"
+            },
+            "sending":
+            
+            {
+                "name":"Envoi en cours..."
+            }
         }
-    },
-    "error": {
-        "smtp_connection": "Serveur SMTP introuvable ou connexion refusée (%s:%s). Veuillez vérifier l'adresse IP, le nom d'hôte et la disponibilité du serveur SMTP",
-        "smtp_auth": "Connexion impossible. Veuillez vérifier vos paramètres et/ou vos identifiants",
-        "smtp_disconnected": "SMTPServerDisconnected lors de l'envoi de l'email : nouvelle tentative de connexion",
-        "smtp_exception": "SMTPException lors de l'envoi de l'email : nouvelle tentative de connexion",
-        "attachment_not_found": "Pièce jointe %s introuvable. Ignorée",
-        "attachment_mime_type": "La pièce jointe %s a un type MIME inconnu. Utilisation du type fichier par défaut",
-        "remote_path_not_allowed": "Chemin distant non autorisé. Veuillez ajouter %(file_path)s à %(allow_list)s dans votre configuration. Pour plus d'informations : %(url)s"
     },
     "selector": {
         "encryption": {
@@ -92,10 +90,12 @@
                     "description": "Séparer plusieurs destinataires par des virgules."
                 },
                 "title": {
-                    "name": "Objet"
+                    "name": "Objet",
+                    "description": ""
                 },
                 "message": {
-                    "name": "Message"
+                    "name": "Message",
+                    "description": ""
                 }
             }
         }

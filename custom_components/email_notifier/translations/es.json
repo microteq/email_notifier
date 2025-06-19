@@ -56,46 +56,56 @@
             }
         },
         "state": {
-            "ready": "Listo",
-            "sending": "Enviando..."
+            "ready":
+            {
+                "name":  "Listo"
+            },
+            "sending":
+            {
+                "name": "Enviando..."
+            } 
         }
     },
-    "error": {
-        "smtp_connection": "Servidor SMTP no encontrado o conexión rechazada (%s:%s). Por favor, verifica la dirección IP, el nombre del host y la disponibilidad del servidor SMTP",
-        "smtp_auth": "No es posible iniciar sesión. Por favor, verifica la configuración y/o las credenciales",
-        "smtp_disconnected": "SMTPServerDisconnected enviando correo: reintentando conexión",
-        "smtp_exception": "SMTPException enviando correo: reintentando conexión",
-        "attachment_not_found": "Adjunto %s no encontrado. Omitiendo",
-        "attachment_mime_type": "El adjunto %s tiene un tipo MIME desconocido. Se usará tipo archivo",
-        "remote_path_not_allowed": "Ruta remota no permitida. Por favor, agrega %(file_path)s a %(allow_list)s en tu configuración. Para más información: %(url)s"
-    },
-    "selector": {
-        "encryption": {
-            "options": {
+    "selector": 
+    {
+        "encryption": 
+        {
+            "options": 
+            {
                 "none": "Ninguno",
                 "starttls": "STARTTLS",
                 "tls": "TLS"
             }
         }
     },
-    "services": {
-        "send": {
+    "services": 
+    {
+        "send": 
+        {
             "name": "Enviar correo",
             "description": "Enviar un mensaje de correo a uno o más destinatarios.",
-            "fields": {
-                "account": {
+            "fields": 
+            {
+                "account": 
+                {
                     "name": "Cuenta de correo remitente",
                     "description": "La cuenta de correo del remitente"
                 },
-                "recipients": {
+                "recipients": 
+                {
                     "name": "Correo(s) del destinatario",
                     "description": "Separa múltiples destinatarios con comas."
                 },
-                "title": {
-                    "name": "Asunto"
+                "title": 
+                {
+                    "name": "Asunto",
+                    "description": ""
+
                 },
-                "message": {
-                    "name": "Mensaje"
+                "message": 
+                {
+                    "name": "Mensaje",
+                    "description": ""
                 }
             }
         }

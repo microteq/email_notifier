@@ -71,10 +71,16 @@
         },
         "state": 
         {
-            "ready": {"name":"Ready"},
-            "sending": {"name": "Sending..."}
-        }
+            "ready": 
+            { 
+                "name": "Ready"
+            },
+            "sending":
+            {
+                "name": "Sending..."
+            }
 
+        }
     },
     "selector": 
     {
