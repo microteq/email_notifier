@@ -1,3 +1,9 @@
+[![License](https://img.shields.io/github/license/microteq/email_notifier.svg)](LICENSE)
+[![HACS Supported](https://img.shields.io/badge/HACS-Supported-green.svg)](https://github.com/custom-components/hacs)
+![GitHub Activity](https://img.shields.io/github/commit-activity/y/microteq/email_notifier.svg?label=commits)
+[![Stable](https://img.shields.io/github/release/microteq/email_notifier.svg)](https://github.com/microteq/email_notifier/releases/latest)
+<!--![Downloads](https://img.shields.io/github/downloads/microteq/email_notifier/total)-->
+
 # Home Assistant Email Notifier
 **Sending email notifications from Home Assistant.**
 
