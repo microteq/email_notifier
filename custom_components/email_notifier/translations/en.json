@@ -117,10 +117,40 @@
                     "name": "Subject",
                     "description": ""
                 },
-                "message": 
+                "message":
                 {
                     "name": "Message",
-                    "description": ""
+                    "description": "Plain text message body. Optional when using HTML."
+                },
+                "html":
+                {
+                    "name": "HTML Content",
+                    "description": "HTML version of the email body for rich formatting"
+                },
+                "images":
+                {
+                    "name": "Images",
+                    "description": "Image file paths or URLs to embed in HTML emails (one per line)"
+                },
+                "attachments":
+                {
+                    "name": "Attachments",
+                    "description": "File paths or URLs to attach (one per line)"
+                },
+                "from_address":
+                {
+                    "name": "From Address",
+                    "description": "Custom sender email address"
+                },
+                "sender_name":
+                {
+                    "name": "Sender Name",
+                    "description": "Custom sender display name"
+                },
+                "reply_to":
+                {
+                    "name": "Reply-To Address",
+                    "description": "Email address for replies"
                 }
             }
         }
