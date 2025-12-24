@@ -16,6 +16,9 @@ GLOBAL_API = "api"
 ATTR_IMAGES: Final = "images"  # optional embedded image file attachments
 ATTR_HTML: Final = "html"
 ATTR_SENDER_NAME: Final = "sender_name"
+ATTR_FROM_ADDRESS: Final = "from_address"  # optional override for from address
+ATTR_REPLY_TO: Final = "reply_to"  # optional reply-to address
+ATTR_ATTACHMENTS: Final = "attachments"  # optional file attachments
 
 CONF_ENCRYPTION: Final = "encryption"
 CONF_DEBUG: Final = "debug"
