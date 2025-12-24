@@ -76,11 +76,31 @@ async def async_send_email(call):
     if call.data.get("html"):
         data["html"] = call.data.get("html")
     if call.data.get("images"):
-        data["images"] = call.data.get("images")
+        # Parse multiline string input into list
+        images_input = call.data.get("images")
+        if isinstance(images_input, str):
+            # Split by newlines and filter out empty lines
+            data["images"] = [line.strip() for line in images_input.split('\n') if line.strip()]
+        elif isinstance(images_input, list):
+            data["images"] = images_input
+    if call.data.get("attachments"):
+        # Parse multiline string input into list
+        attachments_input = call.data.get("attachments")
+        if isinstance(attachments_input, str):
+            # Split by newlines and filter out empty lines
+            data["attachments"] = [line.strip() for line in attachments_input.split('\n') if line.strip()]
+        elif isinstance(attachments_input, list):
+            data["attachments"] = attachments_input
     if call.data.get("account"):
         data["account"] = call.data.get("account")
     if call.data.get("recipients"):
         data["recipients"] = call.data.get("recipients")
+    if call.data.get("from_address"):
+        data["from_address"] = call.data.get("from_address")
+    if call.data.get("sender_name"):
+        data["sender_name"] = call.data.get("sender_name")
+    if call.data.get("reply_to"):
+        data["reply_to"] = call.data.get("reply_to")
     # Get sender entity
     entity_reg = er.async_get(call.hass)
     entity = entity_reg.async_get(data["account"])
@@ -113,9 +133,13 @@ async def async_setup(hass, config):
                 vol.Required("account"): str,
                 vol.Optional("recipients"): str,
                 vol.Optional("title"): str,
-                vol.Required("message"): str,
+                vol.Optional("message"): str,
                 vol.Optional("html"): str,
-                vol.Optional("images"): [str],
+                vol.Optional("images"): str,
+                vol.Optional("attachments"): str,
+                vol.Optional("from_address"): str,
+                vol.Optional("sender_name"): str,
+                vol.Optional("reply_to"): str,
             }
         ),
     )
