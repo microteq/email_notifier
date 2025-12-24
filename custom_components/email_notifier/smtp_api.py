@@ -14,6 +14,9 @@ import logging
 from pathlib import Path
 import smtplib
 import socket
+from urllib.parse import urlparse
+
+import aiohttp
 
 from homeassistant.const import CONF_VERIFY_SSL
 from homeassistant.core import HomeAssistant
@@ -22,8 +25,11 @@ from homeassistant.util import dt as dt_util
 from homeassistant.util.ssl import client_context
 
 from .const import (
+    ATTR_ATTACHMENTS,
+    ATTR_FROM_ADDRESS,
     ATTR_HTML,
     ATTR_IMAGES,
+    ATTR_REPLY_TO,
     CONF_DEBUG,
     CONF_ENCRYPTION,
     CONF_PASSWORD,
@@ -149,7 +155,7 @@ class SmtpAPI:
         self.config_data = config_data
         if ATTR_HTML in data:
             # HTML text flag
-            msg = _build_html_msg(
+            msg = await _build_html_msg(
                 self.hass,
                 message,
                 data[ATTR_HTML],
@@ -157,12 +163,24 @@ class SmtpAPI:
             )
         elif ATTR_IMAGES in data:
             # No HTML text, but image attachments
-            msg = _build_multipart_msg(
+            msg = await _build_multipart_msg(
                 self.hass, message, images=data.get(ATTR_IMAGES, [])
             )
         else:
-            # Neither HTML nor image attachments
-            msg = _build_text_msg(message)
+            # Plain text or with attachments only
+            if ATTR_ATTACHMENTS in data and data[ATTR_ATTACHMENTS]:
+                # Plain text with attachments
+                msg = await _build_multipart_msg(self.hass, message, images=[])
+            else:
+                # Plain text only
+                msg = _build_text_msg(message)
+
+        # Add general file attachments if provided (to any message type)
+        if ATTR_ATTACHMENTS in data and data[ATTR_ATTACHMENTS]:
+            for attach_path in data[ATTR_ATTACHMENTS]:
+                attachment = await _attach_file(self.hass, attach_path)
+                if attachment:
+                    msg.attach(attachment)
         # Subject
         msg["Subject"] = title
         # Recipients: Send to recipients, if provided, otherwise send to default recipients of config
@@ -172,11 +190,26 @@ class SmtpAPI:
         else:
             msg["To"] = self.config_data[CONF_RECIPIENTS] if isinstance(self.config_data[CONF_RECIPIENTS], str) else ",".join(self.config_data[CONF_RECIPIENTS])
             recipient_list = [recipient.strip() for recipient in self.config_data[CONF_RECIPIENTS].split(",")] if isinstance(self.config_data[CONF_RECIPIENTS], str) else self.config_data[CONF_RECIPIENTS]
-        # Sender
-        if self.config_data.get(CONF_SENDER_NAME):
-            msg["From"] = f"{self.config_data[CONF_SENDER_NAME]} <{self.config_data[CONF_SENDER]}>"
+        # Sender: Use from_address from data if provided, otherwise use config sender
+        if ATTR_FROM_ADDRESS in data:
+            # Custom from address provided in data
+            from_address = data[ATTR_FROM_ADDRESS]
+            # Check if sender_name is also provided in data
+            if "sender_name" in data:
+                msg["From"] = f"{data['sender_name']} <{from_address}>"
+            else:
+                msg["From"] = from_address
         else:
-            msg["From"] = self.config_data[CONF_SENDER]
+            # Use config sender
+            if self.config_data.get(CONF_SENDER_NAME):
+                msg["From"] = f"{self.config_data[CONF_SENDER_NAME]} <{self.config_data[CONF_SENDER]}>"
+            else:
+                msg["From"] = self.config_data[CONF_SENDER]
+
+        # Reply-To: Add reply-to header if provided
+        if ATTR_REPLY_TO in data:
+            msg["Reply-To"] = data[ATTR_REPLY_TO]
+
         msg["X-Mailer"] = "Home Assistant"
         msg["Date"] = email.utils.format_datetime(dt_util.now())
         msg["Message-Id"] = email.utils.make_msgid()
@@ -211,6 +244,31 @@ class SmtpAPI:
 
 
 # ***********************************************************************************************************************************************
+# Purpose:  Download file from URL
+# History:  D.Geisenhoff    07-MAY-2025     Created
+# ***********************************************************************************************************************************************
+async def _download_file_from_url(url: str) -> tuple[bytes, str] | None:
+    """Download file from URL and return content and filename."""
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=30)) as response:
+                if response.status == 200:
+                    content = await response.read()
+                    # Try to get filename from URL
+                    parsed_url = urlparse(url)
+                    filename = Path(parsed_url.path).name
+                    if not filename:
+                        filename = "attachment"
+                    return content, filename
+                else:
+                    _LOGGER.warning("Failed to download file from %s: HTTP %s", url, response.status)
+                    return None
+    except Exception as err:
+        _LOGGER.warning("Error downloading file from %s: %s", url, err)
+        return None
+
+
+# ***********************************************************************************************************************************************
 # Purpose:  Built plain text message
 # History:  D.Geisenhoff    07-MAY-2025     Created
 # ***********************************************************************************************************************************************
@@ -224,49 +282,62 @@ def _build_text_msg(message):
 # Purpose:  Attach file to message
 # History:  D.Geisenhoff    07-MAY-2025     Created
 # ***********************************************************************************************************************************************
-def _attach_file(hass, atch_name, content_id=""):
+async def _attach_file(hass, atch_name, content_id=""):
     """Create a message attachment.
 
+    Supports both local files and remote URLs (http/https).
     If MIMEImage is successful and content_id is passed (HTML), add images in-line.
     Otherwise add them as attachments.
     """
-    try:
-        file_path = Path(atch_name).parent
-        if file_path.exists() and not hass.config.is_allowed_path(
-            str(file_path)
-        ):
-            allow_list = "allowlist_external_dirs"
+    # Check if it's a URL
+    is_url = atch_name.startswith(('http://', 'https://'))
+
+    if is_url:
+        # Download file from URL
+        result = await _download_file_from_url(atch_name)
+        if result is None:
+            return None
+        file_bytes, file_name = result
+    else:
+        # Local file
+        try:
+            file_path = Path(atch_name).parent
+            if file_path.exists() and not hass.config.is_allowed_path(
+                str(file_path)
+            ):
+                allow_list = "allowlist_external_dirs"
+                file_name = Path(atch_name).name
+                url = "https://www.home-assistant.io/docs/configuration/basic/"
+                raise ServiceValidationError(
+                    translation_domain=DOMAIN,
+                    translation_key="remote_path_not_allowed",
+                    translation_placeholders={
+                        "allow_list": allow_list,
+                        "file_path": str(file_path),
+                        "file_name": str(file_name),
+                        "url": url,
+                    },
+                )
+            with Path.open(atch_name, "rb") as attachment_file:
+                file_bytes = attachment_file.read()
             file_name = Path(atch_name).name
-            url = "https://www.home-assistant.io/docs/configuration/basic/"
-            raise ServiceValidationError(
-                translation_domain=DOMAIN,
-                translation_key="remote_path_not_allowed",
-                translation_placeholders={
-                    "allow_list": allow_list,
-                    "file_path": str(file_path),
-                    "file_name": str(file_name),
-                    "url": url,
-                },
+        except FileNotFoundError:
+            _LOGGER.warning(
+                "Attachment not found: %s",
+                atch_name
             )
-        with Path.open(atch_name, "rb") as attachment_file:
-            file_bytes = attachment_file.read()
-    except FileNotFoundError:
-        _LOGGER.warning(
-            hass.states.async_get("error.attachment_not_found"),
-            atch_name
-        )
-        return None
+            return None
 
     try:
         attachment = MIMEImage(file_bytes)
     except TypeError:
-        _LOGGER.warning(
-            hass.states.async_get("error.attachment_mime_type"),
+        _LOGGER.debug(
+            "File is not an image, attaching as application: %s",
             atch_name,
         )
-        attachment = MIMEApplication(file_bytes, Name=Path(atch_name).name)
+        attachment = MIMEApplication(file_bytes, Name=file_name)
         attachment["Content-Disposition"] = (
-            f'attachment; filename="{Path(atch_name).name}"'
+            f'attachment; filename="{file_name}"'
         )
     else:
         if content_id:
@@ -274,7 +345,7 @@ def _attach_file(hass, atch_name, content_id=""):
         else:
             attachment.add_header(
                 "Content-Disposition",
-                f"attachment; filename={Path(atch_name).name}",
+                f"attachment; filename={file_name}",
             )
 
     return attachment
@@ -284,7 +355,7 @@ def _attach_file(hass, atch_name, content_id=""):
 # Purpose:  Build multipart message with images as attachment
 # History:  D.Geisenhoff    07-MAY-2025     Created
 # ***********************************************************************************************************************************************
-def _build_multipart_msg(hass, message, images):
+async def _build_multipart_msg(hass, message, images):
     """Build Multipart message with images as attachments."""
     _LOGGER.debug("Building multipart email with image attachment(s)")
     msg = MIMEMultipart()
@@ -292,7 +363,7 @@ def _build_multipart_msg(hass, message, images):
     msg.attach(body_txt)
 
     for atch_name in images:
-        attachment = _attach_file(hass, atch_name)
+        attachment = await _attach_file(hass, atch_name)
         if attachment:
             msg.attach(attachment)
 
@@ -303,7 +374,7 @@ def _build_multipart_msg(hass, message, images):
 # Purpose:  Build Multipart message with in-line images and rich HTML (UTF-8)
 # History:  D.Geisenhoff    07-MAY-2025     Created
 # ***********************************************************************************************************************************************
-def _build_html_msg(hass, text, html, images):
+async def _build_html_msg(hass, text, html, images):
     """Build Multipart message with in-line images and rich HTML (UTF-8)."""
     _LOGGER.debug("Building HTML rich email")
     msg = MIMEMultipart("related")
@@ -313,8 +384,13 @@ def _build_html_msg(hass, text, html, images):
     msg.attach(alternative)
 
     for atch_name in images:
-        name = Path(atch_name).name
-        attachment = _attach_file(hass, atch_name, name)
+        # Extract filename from URL or path
+        if atch_name.startswith(('http://', 'https://')):
+            parsed_url = urlparse(atch_name)
+            name = Path(parsed_url.path).name
+        else:
+            name = Path(atch_name).name
+        attachment = await _attach_file(hass, atch_name, name)
         if attachment:
             msg.attach(attachment)
     return msg
