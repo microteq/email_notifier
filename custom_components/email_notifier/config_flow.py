@@ -59,8 +59,8 @@ def get_schema(self, user_input: dict[str, Any] | None) -> vol.Schema:
     """Return schema."""
     if user_input is None:
         user_input = {}
-    if hasattr(self, "config_entry"):
-        config_entry = self.config_entry
+    if hasattr(self, "_entry"):
+        config_entry = self._entry
     else:
         config_entry =  SimpleNamespace()
         config_entry.options = {}
@@ -166,8 +166,7 @@ class EmailClientOptionsFlow(config_entries.OptionsFlow):
     # ***********************************************************************************************************************************************
     def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
         """Initialize options flow."""
-        self.config_entry = config_entry
-
+        self._entry = config_entry
 
     # ***********************************************************************************************************************************************
     # Purpose:  Show first (and in this case only) step of config form
@@ -185,9 +184,9 @@ class EmailClientOptionsFlow(config_entries.OptionsFlow):
                     )
             # Merge user_input and config_entry.data into new dictionary and save back to config_entry.data
             # config_entry.option is not needed, because the info for creating an entry (data) and for editing an entry (option) is the same.
-            new_data = {**self._config_entry.data, **user_input}
+            new_data = {**self._entry.data, **user_input}
             # async_update_entry saves the new changes
-            self.hass.config_entries.async_update_entry(self._config_entry, data=new_data, title = user_input[CONF_SENDER])
+            self.hass.config_entries.async_update_entry(self._entry, data=new_data, title = user_input[CONF_SENDER])
             # Save back an empty object to config_entry.options
             return self.async_create_entry(title="", data = {})
         return self.async_show_form(step_id="init", data_schema=get_schema(self, user_input))
