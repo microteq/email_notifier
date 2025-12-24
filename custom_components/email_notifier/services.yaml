@@ -2,18 +2,69 @@ send:
   fields:
     account:
       required: true
+      description: The email account entity to use for sending
       selector:
         entity:
           integration: email_notifier
     recipients:
-      required: true
+      required: false
+      description: Email recipient(s). Comma-separated for multiple recipients. If not provided, uses default recipients from config.
+      example: "user@example.com"
       selector:
         text:
     title:
       required: true
+      description: Email subject line
+      example: "Home Assistant Notification"
       selector:
         text:
     message:
-      required: true
+      required: false
+      description: Email message body (plain text). Optional when using HTML - will default to empty string if not provided.
+      example: "Your doorbell was pressed"
       selector:
-            text:
+        text:
+          multiline: true
+    html:
+      required: false
+      description: HTML version of the email body. When provided, email will be sent as multipart with both plain text and HTML versions.
+      example: "<html><body><h1>Alert</h1><p>Your doorbell was pressed</p></body></html>"
+      selector:
+        text:
+          multiline: true
+    images:
+      required: false
+      description: Image file paths or URLs to embed in HTML emails (shown inline). Enter one path per line. Supports local files and remote URLs.
+      example: |
+        /config/www/camera.jpg
+        https://example.com/image.png
+      selector:
+        text:
+          multiline: true
+    attachments:
+      required: false
+      description: File paths or URLs to attach (any file type). Enter one path per line. Supports local files and remote URLs.
+      example: |
+        /config/www/report.pdf
+        https://example.com/document.pdf
+      selector:
+        text:
+          multiline: true
+    from_address:
+      required: false
+      description: Custom "From" email address. Overrides the configured sender address for this message only.
+      example: "alerts@example.com"
+      selector:
+        text:
+    sender_name:
+      required: false
+      description: Custom sender display name. Can be used with from_address or alone.
+      example: "Home Assistant Alerts"
+      selector:
+        text:
+    reply_to:
+      required: false
+      description: Reply-To email address. Recipients' replies will be directed to this address.
+      example: "replies@example.com"
+      selector:
+        text:
