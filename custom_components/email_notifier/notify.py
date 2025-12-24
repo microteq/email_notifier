@@ -220,7 +220,3 @@ class MailNotificationService(BaseNotificationService, Entity):
         api = self.hass.data[DOMAIN]['api']
         await api.send_message(message, title, self.config_entry.options if self.config_entry.options else self.config_entry.data, data)
         self.state = 'ready'
-
-
-
-
