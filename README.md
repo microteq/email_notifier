@@ -218,7 +218,38 @@ data:
 - Empty lines are automatically filtered out
 - Whitespace is trimmed from each line
 - Supports http:// and https:// protocols
+<br/>
 
+### Inline Images (Local & Remote)
+**Description:** Embed images directly in HTML emails using Content-ID references.
+
+**Usage Example:**
+```yaml
+service: email_notifier.send
+data:
+  account: notify.email_notification_sender_0
+  title: "Camera Alert"
+  html: |
+    <html>
+      <body>
+        <h1>Motion Detected</h1>
+        <p>Camera snapshot:</p>
+        <img src="cid:camera.jpg" width="600"/>
+        <p>Logo:</p>
+        <img src="cid:logo.png"/>
+      </body>
+    </html>
+  images: |
+    /config/www/camera.jpg
+    https://example.com/logo.png
+  recipients: "user@example.com"
+```
+
+**How It Works:**
+- Images are embedded using Content-ID (cid:filename)
+- Reference images in HTML with `<img src="cid:filename.jpg"/>`
+- Supports both local files and remote URLs
+<br/>
 
 ## License
 
