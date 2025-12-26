@@ -298,7 +298,7 @@ data:
 ```
 
 This will display as: **"Home Assistant Alerts <alerts@mydomain.com>"**
-<br/>
+<br/><br/>
 
 ### Custom Reply-To Address
 **Description:** Specify where recipient replies should be directed.
