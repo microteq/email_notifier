@@ -300,6 +300,27 @@ data:
 This will display as: **"Home Assistant Alerts <alerts@mydomain.com>"**
 <br/>
 
+### Custom Reply-To Address
+**Description:** Specify where recipient replies should be directed.
+
+**Usage Example:**
+```yaml
+service: email_notifier.send
+data:
+  account: notify.email_notification_sender_0
+  title: "Survey"
+  message: "Please reply with your feedback"
+  reply_to: "feedback@mydomain.com"
+  recipients: "user@example.com"
+```
+
+**Use Cases:**
+- Direct replies to a support mailbox
+- Separate sending and receiving addresses
+- No-reply scenarios with monitored reply-to address
+<br/>
+
+
 ## License
 
 This integration is published under the GNU General Public License v3.0.
