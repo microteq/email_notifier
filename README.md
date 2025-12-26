@@ -16,6 +16,8 @@ The Email Notifier is an integration for Home Assistant allowing you to send ema
 - UI-based configuration for easy setup.
 - Backward compatibility with YAML configuration.
 - Supports sending messages to multiple recipients.
+- Send images and attachments.
+- Send plain text or html messages.
 - Options flow to update configurations without reinstallation.
 - Detailed error handling and logging for troubleshooting.
 <br />
