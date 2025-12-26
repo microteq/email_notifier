@@ -9,5 +9,5 @@
   "iot_class": "cloud_push",
   "issue_tracker": "https://github.com/microteq/email_notifier/issues",
   "requirements": [],
-  "version": "0.1.1"
+  "version": "0.1.2"
 }
