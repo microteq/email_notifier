@@ -328,7 +328,7 @@ This integration is published under the GNU General Public License v3.0.
 
 ## Attribution
 
-The Email Notifier is based on the Home Assistant SMTP integration.
+The Email Notifier is based on the Home Assistant SMTP integration. Thanks to onoffautomations for adding some new features.
 <br />
 <br />
 <br />
