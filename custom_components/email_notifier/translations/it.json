@@ -56,12 +56,10 @@
             }
         },
         "state": {
-            "ready": 
-            {
+            "ready": {
                 "name": "Pronto"
             },
-            "sending":
-            {
+            "sending": {
                 "name": "Invio in corso..."
             }
         }
@@ -77,8 +75,8 @@
     },
     "services": {
         "send": {
-            "name": "Invia Email",
-            "description": "Invia un messaggio email a uno o più destinatari.",
+            "name": "Invia Email.",
+            "description": "Invia un messaggio email a uno o più destinatari",
             "fields": {
                 "account": {
                     "name": "Account email mittente",
@@ -86,15 +84,39 @@
                 },
                 "recipients": {
                     "name": "Email destinatario(i)",
-                    "description": "Separa più destinatari con una virgola."
+                    "description": "Separa più destinatari con una virgola"
                 },
                 "title": {
                     "name": "Oggetto",
-                    "description": ""
+                    "description": "Oggetto dell'email"
                 },
                 "message": {
                     "name": "Messaggio",
-                    "description": ""
+                    "description": "Corpo del messaggio in testo semplice. Facoltativo se si utilizza HTML"
+                },
+                "html": {
+                    "name": "Contenuto HTML",
+                    "description": "Versione HTML del corpo dell'email per una formattazione avanzata"
+                },
+                "images": {
+                    "name": "Immagini",
+                    "description": "Percorsi file immagine o URL da incorporare nelle email HTML (uno per riga)"
+                },
+                "attachments": {
+                    "name": "Allegati",
+                    "description": "Percorsi file o URL da allegare (uno per riga)"
+                },
+                "from_address": {
+                    "name": "Indirizzo Mittente",
+                    "description": "Indirizzo email del mittente personalizzato"
+                },
+                "sender_name": {
+                    "name": "Nome Mittente",
+                    "description": "Nome visualizzato del mittente personalizzato"
+                },
+                "reply_to": {
+                    "name": "Indirizzo di Risposta (Reply-To)",
+                    "description": "Indirizzo email per le risposte"
                 }
             }
         }

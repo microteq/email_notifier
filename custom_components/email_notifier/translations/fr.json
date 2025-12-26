@@ -56,14 +56,11 @@
             }
         },
         "state": {
-            "ready":
-            {
+            "ready": {
                 "name": "Prêt"
             },
-            "sending":
-            
-            {
-                "name":"Envoi en cours..."
+            "sending": {
+                "name": "Envoi en cours..."
             }
         }
     },
@@ -78,8 +75,8 @@
     },
     "services": {
         "send": {
-            "name": "Envoyer un email",
-            "description": "Envoyer un message email à un ou plusieurs destinataires.",
+            "name": "Envoyer un email.",
+            "description": "Envoyer un message email à un ou plusieurs destinataires",
             "fields": {
                 "account": {
                     "name": "Compte email de l'expéditeur",
@@ -87,15 +84,39 @@
                 },
                 "recipients": {
                     "name": "Email(s) du/des destinataire(s)",
-                    "description": "Séparer plusieurs destinataires par des virgules."
+                    "description": "Séparer plusieurs destinataires par des virgules"
                 },
                 "title": {
                     "name": "Objet",
-                    "description": ""
+                    "description": "Objet de l'email"
                 },
                 "message": {
                     "name": "Message",
-                    "description": ""
+                    "description": "Corps du message en texte brut. Facultatif si HTML est utilisé"
+                },
+                "html": {
+                    "name": "Contenu HTML",
+                    "description": "Version HTML du corps de l'email pour un formatage enrichi"
+                },
+                "images": {
+                    "name": "Images",
+                    "description": "Chemins de fichiers images ou URL à intégrer dans les emails HTML (une par ligne)"
+                },
+                "attachments": {
+                    "name": "Pièces jointes",
+                    "description": "Chemins de fichiers ou URL à joindre (une par ligne)"
+                },
+                "from_address": {
+                    "name": "Adresse de l'expéditeur",
+                    "description": "Adresse email personnalisée de l'expéditeur"
+                },
+                "sender_name": {
+                    "name": "Nom de l'expéditeur",
+                    "description": "Nom d'affichage personnalisé de l'expéditeur"
+                },
+                "reply_to": {
+                    "name": "Adresse de réponse (Reply-To)",
+                    "description": "Adresse email pour les réponses"
                 }
             }
         }

@@ -1,0 +1,6 @@
+{
+  "python.analysis.extraPaths": [
+    "/home/administrator/homeassistant-core/venv/lib/python3.13/site-packages/"
+  ],
+  "python.analysis.typeCheckingMode": "basic"
+}

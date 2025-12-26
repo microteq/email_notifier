@@ -56,56 +56,67 @@
             }
         },
         "state": {
-            "ready":
-            {
-                "name":  "Listo"
+            "ready": {
+                "name": "Listo"
             },
-            "sending":
-            {
+            "sending": {
                 "name": "Enviando..."
-            } 
+            }
         }
     },
-    "selector": 
-    {
-        "encryption": 
-        {
-            "options": 
-            {
+    "selector": {
+        "encryption": {
+            "options": {
                 "none": "Ninguno",
                 "starttls": "STARTTLS",
                 "tls": "TLS"
             }
         }
     },
-    "services": 
-    {
-        "send": 
-        {
+    "services": {
+        "send": {
             "name": "Enviar correo",
             "description": "Enviar un mensaje de correo a uno o más destinatarios.",
-            "fields": 
-            {
-                "account": 
-                {
+            "fields": {
+                "account": {
                     "name": "Cuenta de correo remitente",
                     "description": "La cuenta de correo del remitente"
                 },
-                "recipients": 
-                {
+                "recipients": {
                     "name": "Correo(s) del destinatario",
-                    "description": "Separa múltiples destinatarios con comas."
+                    "description": "Separa múltiples destinatarios con comas"
                 },
-                "title": 
-                {
+                "title": {
                     "name": "Asunto",
-                    "description": ""
-
+                    "description": "Asunto del correo electrónico"
                 },
-                "message": 
-                {
+                "message": {
                     "name": "Mensaje",
-                    "description": ""
+                    "description": "Cuerpo del mensaje en texto plano. Opcional si se utiliza HTML"
+                },
+                "html": {
+                    "name": "Contenido HTML",
+                    "description": "Versión HTML del cuerpo del correo para formato enriquecido"
+                },
+                "images": {
+                    "name": "Imágenes",
+                    "description": "Rutas de archivos de imagen o URLs para incrustar en correos HTML (una por línea)"
+                },
+                "attachments": {
+                    "name": "Adjuntos",
+                    "description": "Rutas de archivos o URLs para adjuntar (una por línea)"
+                },
+                "from_address": {
+                    "name": "Dirección del remitente",
+                    "description": "Dirección de correo personalizada del remitente"
+                },
+                "sender_name": {
+                    "name": "Nombre del remitente",
+                    "description": "Nombre para mostrar personalizado del remitente"
+                },
+                "reply_to": {
+                    "name": "Dirección de respuesta (Reply-To)",
+                    "description": "Dirección de correo para respuestas"
                 }
             }
         }

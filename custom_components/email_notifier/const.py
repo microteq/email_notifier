@@ -1,6 +1,10 @@
 # ***********************************************************************************************************************************************
 # Purpose:  Constants for the Email Notification Service integration.
 # History:  D.Geisenhoff    07-MAY-2025     Created
+#           D.Geisenhoff    26-DEC-2025 Merged pull request from onoffautomations:
+#                                       - Added ATTR_FROM_ADDRESS
+#                                       - Added ATTR_REPLY_TO
+#                                       - Added ATTR_ATTACHMENTS
 # ***********************************************************************************************************************************************
 """Constants for the Email Notification Service integration."""
 

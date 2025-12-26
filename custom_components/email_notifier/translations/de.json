@@ -49,23 +49,17 @@
             "connection_failed": "Verbindung zum SMTP-Server fehlgeschlagen. Bitte überprüfen Sie die Einstellungen."
         }
     },
-    "entity": 
-    {
-        "notify":
-        {
-            "entity_name": 
-            {
-             "name": "Absender E-Mail Konto: {sender}"
+    "entity": {
+        "notify": {
+            "entity_name": {
+                "name": "Absender E-Mail Konto: {sender}"
             }
         },
-        "state": 
-        {
-            "ready": 
-            {
+        "state": {
+            "ready": {
                 "name": "Bereit"
             },
-            "sending":
-            { 
+            "sending": {
                 "name": "Sende..."
             }
         }
@@ -90,27 +84,57 @@
             "description": "Eine E-Mail Nachricht an einen oder mehrere Empfänger versenden.",
             "fields": 
             {
-                "account":
+                "account": 
                 {
                     "name": "Absender-E-Mail Konto",
                     "description": "Das E-Mail Konto des Absenders"
                 },
-                    "recipients": 
+                "recipients": 
                 {
                     "name": "Empfänger-E-Mail(s)",
-                    "description": "Mehere Empfänger durch Komma trennen."
+                    "description": "Mehrere Empfänger durch Komma trennen"
                 },
                 "title": 
                 {
                     "name": "Betreff",
-                    "description": ""
+                    "description": "Betreff der E-Mail"
                 },
                 "message": 
                 {
                     "name": "Nachricht",
-                    "description": ""
+                    "description": "Einfacher Textinhalt. Optional, wenn HTML verwendet wird"
+                },
+                "html": 
+                {
+                    "name": "HTML-Inhalt",
+                    "description": "HTML-Version des E-Mail-Körpers für erweiterte Formatierung"
+                },
+                "images": 
+                {
+                    "name": "Bilder",
+                    "description": "Bild-Dateipfade oder URLs zum Einbetten in HTML-E-Mails (einen pro Zeile)"
+                },
+                "attachments": 
+                {
+                    "name": "Anhänge",
+                    "description": "Dateipfade oder URLs zum Anhängen (einen pro Zeile)"
+                },
+                "from_address": 
+                {
+                    "name": "Absender-Adresse",
+                    "description": "Benutzerdefinierte Absender-E-Mail-Adresse"
+                },
+                "sender_name": 
+                {
+                    "name": "Absender-Name",
+                    "description": "Benutzerdefinierter Anzeigename des Absenders"
+                },
+                "reply_to": 
+                {
+                    "name": "Antwort-an Adresse",
+                    "description": "E-Mail-Adresse für Antworten"
                 }
             }
         }
     }
-} 
+}

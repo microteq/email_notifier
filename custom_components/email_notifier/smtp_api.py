@@ -1,7 +1,14 @@
 # ***********************************************************************************************************************************************
 # Purpose:      SMTP API class.
 # Attribution:  Most of this code code is based on the Home Assistant SMTP integration.
-# History:      D.Geisenhoff    07-MAY-2025     Created
+# History:      D.Geisenhoff    07-MAY-2025 Created
+#               D.Geisenhoff    26-DEC-2025 Merged pull request from onoffautomations:
+#                                           - Added _download_file_from_url() function for remote file downloads
+#                                           - Updated _attach_file() to handle both local files and URLs (made async)
+#                                           - Updated _build_multipart_msg() to async
+#                                           - Updated _build_html_msg() to async with URL filename extraction
+#                                           - Modified send_message() to support custom from_address and reply_to headers
+#                                           - Added support for attachments in all message types
 # ***********************************************************************************************************************************************
 """SMTP API class."""
 
@@ -168,7 +175,7 @@ class SmtpAPI:
             )
         else:
             # Plain text or with attachments only
-            if ATTR_ATTACHMENTS in data and data[ATTR_ATTACHMENTS]:
+            if data.get(ATTR_ATTACHMENTS):
                 # Plain text with attachments
                 msg = await _build_multipart_msg(self.hass, message, images=[])
             else:
@@ -176,7 +183,7 @@ class SmtpAPI:
                 msg = _build_text_msg(message)
 
         # Add general file attachments if provided (to any message type)
-        if ATTR_ATTACHMENTS in data and data[ATTR_ATTACHMENTS]:
+        if data.get(ATTR_ATTACHMENTS):
             for attach_path in data[ATTR_ATTACHMENTS]:
                 attachment = await _attach_file(self.hass, attach_path)
                 if attachment:

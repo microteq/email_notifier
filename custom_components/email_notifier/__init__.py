@@ -1,6 +1,11 @@
 # ***********************************************************************************************************************************************
 # Purpose:  An email notification service integration
-# History:  D.Geisenhoff    06-JUN-2025     Created
+# History:  D.Geisenhoff    06-JUN-2025 Created
+#           D.Geisenhoff    26-DEC-2025 Merged pull request from onoffautomations:
+#                                       - Updated service schema to include new fields
+#                                       - Changed images and attachments to accept string input (multiline)
+#                                       - Added parsing logic to convert multiline string input to lists
+#                                       - Updated async_send_email() to pass new parameters
 # ***********************************************************************************************************************************************
 """Email Notification Service integration."""
 from __future__ import annotations
@@ -51,6 +56,7 @@ CONFIG_SCHEMA = vol.Schema(
     },
     extra=vol.ALLOW_EXTRA,  # Allow additional keys in YAML
 )
+
 
 # ***********************************************************************************************************************************************
 # Purpose:  Initialize global variables
