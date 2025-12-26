@@ -182,8 +182,47 @@ data:
 - Sends as multipart MIME with both plain text and HTML versions
 - Email clients will display HTML version if supported, fall back to plain text otherwise
 - Supports inline images (see Images section below)
+<br/>
+### File Attachments (Local & Remote)
 
----
+**Description:** Attach any file type to emails, supporting both local files and remote URLs.
+
+**Supported Sources:**
+- Local files: `/config/www/report.pdf`
+- Remote URLs: `https://example.com/document.pdf`
+
+**Supported File Types:**
+- Documents: PDF, DOCX, TXT, CSV, XLSX
+- Images: JPG, PNG, GIF, BMP
+- Archives: ZIP, RAR, TAR
+- Any other file type
+
+**Usage Example:**
+```yaml
+service: email_notifier.send
+data:
+  account: notify.email_notification_sender_0
+  title: "Monthly Report Package"
+  message: "Please find attached the monthly reports."
+  attachments: |
+    /config/www/report.pdf
+    https://www.bhphotovideo.com/lit_files/1220335.pdf
+    /config/www/data.csv
+    https://example.com/remote_document.pdf
+  recipients: "user@example.com"
+```
+
+**Input Format:**
+- Enter one file path or URL per line in the multiline text box
+- Empty lines are automatically filtered out
+- Whitespace is trimmed from each line
+
+**Remote URL Features:**
+- Automatic download with 30-second timeout
+- Proper filename extraction from URL
+- Error handling and logging for failed downloads
+- Supports http:// and https:// protocols
+
 
 ## License
 
