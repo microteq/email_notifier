@@ -318,7 +318,7 @@ data:
 - Direct replies to a support mailbox
 - Separate sending and receiving addresses
 - No-reply scenarios with monitored reply-to address
-<br/>
+<br/><br/>
 
 
 ## License
