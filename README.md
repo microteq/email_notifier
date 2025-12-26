@@ -126,12 +126,59 @@ actions:
   - action: email_notifier.send
     metadata: {}
     data:
-      account: notify.email_notification_sender_1
-      recipients: recipient@example.com
-      title: "Test Message"
-      message: "This is a test message from Home Assistant"
+      account: notify.email_notification_sender_0
+      recipients: "user@example.com"
+      title: "Complete Feature Demo"
+      message: "Plain text version of this email"
+      html: |
+        <html>
+          <body>
+            <h1 style="color: #0066cc;">Feature Demonstration</h1>
+            <p>This email showcases all features:</p>
+            <img src="cid:logo.png" width="200"/>
+            <ul>
+              <li>HTML formatting</li>
+              <li>Inline images</li>
+              <li>File attachments</li>
+              <li>Custom sender info</li>
+            </ul>
+          </body>
+        </html>
+      images: |
+        https://example.com/logo.png
+      attachments: |
+        /config/www/report.pdf
+        https://example.com/document.pdf
+      from_address: "noreply@mydomain.com"
+      sender_name: "Home Assistant Demo"
+      reply_to: "support@mydomain.com"
 ```
 <br />
+
+### HTML Email Support
+**Description:** Send rich HTML emails with full styling, images, and formatting.
+
+**Usage Example:**
+```yaml
+service: email_notifier.send
+data:
+  account: notify.email_notification_sender_0
+  title: "Alert Notification"
+  message: "Plain text fallback"
+  html: |
+    <html>
+      <body>
+        <h1 style="color: blue;">Alert</h1>
+        <p>This is a <strong>rich HTML</strong> email with formatting.</p>
+        <ul>
+          <li>Feature 1</li>
+          <li>Feature 2</li>
+        </ul>
+      </body>
+    </html>
+  recipients: "user@example.com"
+```
+
 
 ## License
 
