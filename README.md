@@ -95,7 +95,7 @@ The Email Notifier creates email accounts from which notifications can be sent. 
 In your automation, click on _Add action_, then on _Notifications,_ and select the action _Send a notification message_. In the _Message_ field, enter your message, and as _Target_, click on _Choose entity_ and select one (or more) sender email account(s). The recipients(s) will be the default recipients(s) defined in the mail account configuration. Then save your action.
 
 #### Method B
-In your automation, click on _Add action_, then search for _email_ and select the _Email Notifier: Send Email_ action. Select your sender account, your recipients and enter a subject and your message. Then save your action.
+In your automation, click on _Add action_, then search for _email_ and select the _Email Notifier: Send Email_ action. Select your sender account and fill out the custom fields you need to send your email, such as recipient(s), subject, plain message, html message, attachments or images.
 
 ### Writing YAML
 
