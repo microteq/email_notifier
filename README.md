@@ -178,7 +178,12 @@ data:
     </html>
   recipients: "user@example.com"
 ```
+**Features:**
+- Sends as multipart MIME with both plain text and HTML versions
+- Email clients will display HTML version if supported, fall back to plain text otherwise
+- Supports inline images (see Images section below)
 
+---
 
 ## License
 
