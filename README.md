@@ -183,8 +183,9 @@ data:
 - Email clients will display HTML version if supported, fall back to plain text otherwise
 - Supports inline images (see Images section below)
 <br/>
-### File Attachments (Local & Remote)
 
+
+### File Attachments (Local & Remote)
 **Description:** Attach any file type to emails, supporting both local files and remote URLs.
 
 **Supported Sources:**
@@ -216,11 +217,6 @@ data:
 - Enter one file path or URL per line in the multiline text box
 - Empty lines are automatically filtered out
 - Whitespace is trimmed from each line
-
-**Remote URL Features:**
-- Automatic download with 30-second timeout
-- Proper filename extraction from URL
-- Error handling and logging for failed downloads
 - Supports http:// and https:// protocols
 
 
