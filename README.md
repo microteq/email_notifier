@@ -271,6 +271,35 @@ data:
 - The displayed "From" address in the email will be the custom address
 <br/>
 
+### Custom Display Name (Sender Name)
+**Description:** Set a custom display name for the sender.
+
+**Usage Example:**
+```yaml
+service: email_notifier.send
+data:
+  account: notify.email_notification_sender_0
+  title: "Alert"
+  message: "System notification"
+  sender_name: "Home Security System"
+  recipients: "user@example.com"
+```
+
+**Combined with Custom From Address:**
+```yaml
+service: email_notifier.send
+data:
+  account: notify.email_notification_sender_0
+  title: "Alert"
+  message: "Notification"
+  from_address: "alerts@mydomain.com"
+  sender_name: "Home Assistant Alerts"
+  recipients: "user@example.com"
+```
+
+This will display as: **"Home Assistant Alerts <alerts@mydomain.com>"**
+<br/>
+
 ## License
 
 This integration is published under the GNU General Public License v3.0.
