@@ -251,6 +251,26 @@ data:
 - Supports both local files and remote URLs
 <br/>
 
+### Custom "From" Address
+**Description:** Override the sender's email address for individual messages.
+
+**Usage Example:**
+```yaml
+service: email_notifier.send
+data:
+  account: notify.email_notification_sender_0
+  title: "Security Alert"
+  message: "Motion detected at front door"
+  from_address: "security@mydomain.com"
+  recipients: "user@example.com"
+```
+
+**Notes:**
+- Overrides the configured sender address for this message only
+- The SMTP envelope sender remains the configured account (required for authentication)
+- The displayed "From" address in the email will be the custom address
+<br/>
+
 ## License
 
 This integration is published under the GNU General Public License v3.0.
